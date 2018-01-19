@@ -42,7 +42,7 @@ public class CRCServiceImpl {
 		
 		client = getAllTrustingClient(client);
 		
-		tickersCache = CacheBuilder.newBuilder().maximumSize(10)
+		tickersCache = CacheBuilder.newBuilder().maximumSize(5)
 				.expireAfterWrite(Constants.TICKER_TIMEOUT, TimeUnit.MINUTES).build(new CacheLoader<String, String>() {
 					
 					@Override
@@ -51,7 +51,7 @@ public class CRCServiceImpl {
 					}
 				});
 		
-		tickerCache = CacheBuilder.newBuilder().maximumSize(2000)
+		tickerCache = CacheBuilder.newBuilder().maximumSize(1500)
 				.expireAfterWrite(Constants.TICKER_TIMEOUT, TimeUnit.MINUTES).build(new CacheLoader<String, String>() {
 					
 					@Override
@@ -60,7 +60,7 @@ public class CRCServiceImpl {
 					}
 				});
 		
-		currencyExchangeCache = CacheBuilder.newBuilder().maximumSize(1000)
+		currencyExchangeCache = CacheBuilder.newBuilder().maximumSize(100)
 				.expireAfterWrite(Constants.FIXER_EXCHANGE_TIMEOUT, TimeUnit.DAYS).build(new CacheLoader<String, String>() {
 					
 					@Override
@@ -116,7 +116,7 @@ public class CRCServiceImpl {
 	private static String getTickers() {
 		System.out.println("Getting data from service : getTickers()");
 		String result = null;
-		Request request = new Request.Builder().url(Constants.COINMARKETCAP_TICKER_URL).build();
+		Request request = new Request.Builder().url(Constants.COINMARKETCAP_ALL_TICKER_URL).build();
 
 		try (Response response = client.newCall(request).execute()) {
 			result = response.body().string();
