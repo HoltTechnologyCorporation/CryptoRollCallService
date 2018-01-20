@@ -13,9 +13,9 @@ public class Ticker {
 	private String price_btc;
 	private String market_cap_usd;
 	private String available_supply;
-	private String percent_change_1h;
-	private String percent_change_24h;
-	private String percent_change_7d;
+	private double percent_change_1h;
+	private double percent_change_24h;
+	private double percent_change_7d;
 
 	public String getId() {
 		return id;
@@ -81,27 +81,27 @@ public class Ticker {
 		this.available_supply = available_supply;
 	}
 
-	public String getPercent_change_1h() {
+	public double getPercent_change_1h() {
 		return percent_change_1h;
 	}
 
-	public void setPercent_change_1h(String percent_change_1h) {
+	public void setPercent_change_1h(double percent_change_1h) {
 		this.percent_change_1h = percent_change_1h;
 	}
 
-	public String getPercent_change_24h() {
+	public double getPercent_change_24h() {
 		return percent_change_24h;
 	}
 
-	public void setPercent_change_24h(String percent_change_24h) {
+	public void setPercent_change_24h(double percent_change_24h) {
 		this.percent_change_24h = percent_change_24h;
 	}
 
-	public String getPercent_change_7d() {
+	public double getPercent_change_7d() {
 		return percent_change_7d;
 	}
 
-	public void setPercent_change_7d(String percent_change_7d) {
+	public void setPercent_change_7d(double percent_change_7d) {
 		this.percent_change_7d = percent_change_7d;
 	}
 
