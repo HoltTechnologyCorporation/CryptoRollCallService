@@ -26,3 +26,9 @@ Services that power http://www.cryptorollcall.com
       
 Real time data retrieved from public apis powered by https://www.CoinMarketCap.com
 Data for currency exchange rates from http://fixer.io/
+
+Help out a fellow developer :)
+Ripple (XRP) : rEb8TK3gBgk5auZkwc6sHnwrGVJH8DuaLh 
+Ripple (XRP) Tag : 105680413 
+Ethereum (ETH) : 0xc02b304dc77b45fdad2f056ae9ceaf2fc0ddc57a
+
