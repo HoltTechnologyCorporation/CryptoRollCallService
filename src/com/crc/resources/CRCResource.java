@@ -10,6 +10,7 @@ import javax.ws.rs.core.CacheControl;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.crc.constants.TimePeriodEnum;
 import com.crc.service.CRCServiceImpl;
 
 @Path("/ticker")
@@ -52,4 +53,14 @@ public class CRCResource {
 		cacheControl.setMaxAge(60);
 		return Response.ok(crcService.getHomeChartsFromCache()).cacheControl(cacheControl).build();
 	}
+	
+	@Path("/histo/{period}/{id}")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getHistoricalData(@PathParam("period") TimePeriodEnum period, @PathParam("id") String id) throws IOException {
+		CacheControl cacheControl = new CacheControl();
+		cacheControl.setMaxAge(300);
+		return Response.ok(crcService.getHistoFromCache(period.toString(), id)).cacheControl(cacheControl).build();
+	}
+	
 }
