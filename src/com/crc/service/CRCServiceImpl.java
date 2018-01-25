@@ -3,6 +3,7 @@ package com.crc.service;
 import java.security.cert.CertificateException;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Formatter;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -42,6 +43,7 @@ public class CRCServiceImpl {
 	static LoadingCache<String, String> tickersCache = null;
 	static LoadingCache<String, String> tickerCache = null;
 	static LoadingCache<String, String> currencyExchangeCache = null;
+	static LoadingCache<String, String> histoCache = null;
 
 	/**
 	 * init cache
@@ -77,6 +79,17 @@ public class CRCServiceImpl {
 						return getCurrencyExchangeRates(param);
 					}
 				});
+		
+		histoCache = CacheBuilder.newBuilder().maximumSize(7500)
+				.expireAfterWrite(15, TimeUnit.MINUTES).build(new CacheLoader<String, String>() {
+
+					@Override
+					public String load(String param) throws Exception {
+						String[] arr = param.split("-");
+						return getHistoricalData(arr[0], arr[1]);
+					}
+				});
+
 	}
 
 	/**
@@ -166,6 +179,22 @@ public class CRCServiceImpl {
 	}
 
 	/**
+	 * Get historical data from cache
+	 * @param period
+	 * @param id
+	 * @return
+	 */
+	public String getHistoFromCache(String period, String id) {
+		String result = null;
+		try {
+			result = histoCache.get(period + "-" + id);
+		} catch (ExecutionException ex) {
+			System.out.println("Exception within getHistoFromCache() " + ex.getClass().getName());
+		}
+		return result;
+	}
+	
+	/**
 	 * Load tickers from cache. If not present, call underlying service
 	 * 
 	 * @return
@@ -225,7 +254,7 @@ public class CRCServiceImpl {
 	}
 
 	/**
-	 * Return all tickers
+	 * Return ticker for specified coin
 	 * 
 	 * @return
 	 */
@@ -243,7 +272,7 @@ public class CRCServiceImpl {
 	}
 
 	/**
-	 * 
+	 * Returns exchange rates wrt to currency
 	 * @param id
 	 * @return
 	 */
@@ -259,7 +288,32 @@ public class CRCServiceImpl {
 		}
 		return result;
 	}
-
+	
+	/**
+	 * Get historical data for specified currency for a specified period
+	 * @param period
+	 * @return
+	 */
+	private static String getHistoricalData(String period, String id) {
+		System.out.println("Getting data from service : getHistoricalData() " + period);
+		String result = null;
+		Formatter formatter = new Formatter();
+		Request request = new Request.Builder().url(formatter.format(Constants.COINCAP_HISTO_URL, period, id).toString()).build();
+		try (Response response = client.newCall(request).execute()) {
+			result = response.body().string();
+		} catch (Exception ex) {
+			System.out.println("Exception within getHistoricalData() " + ex.getClass().getName());
+		} finally {
+			formatter.close();
+		}
+		return result;
+	}
+	
+	/**
+	 * Trust all certs 
+	 * @param client
+	 * @return
+	 */
 	private static OkHttpClient getAllTrustingClient(OkHttpClient client) {
 		OkHttpClient okHttpClient = null;
 		try {
