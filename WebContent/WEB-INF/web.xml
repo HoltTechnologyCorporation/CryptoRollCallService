@@ -23,6 +23,12 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 
+	<servlet>
+		<servlet-name>PreComputeUtils</servlet-name>
+		<servlet-class>com.crc.utils.PreComputeUtils</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
 	<servlet-mapping>
 		<servlet-name>jersey-serlvet</servlet-name>
 		<url-pattern>/*</url-pattern>
