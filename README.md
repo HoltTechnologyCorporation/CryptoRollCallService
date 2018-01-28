@@ -1,4 +1,5 @@
 # CryptoRollCallService
+[![Build Status](https://travis-ci.org/shankarganesh1234/CryptoRollCallService.svg?branch=master)](https://travis-ci.org/shankarganesh1234/CryptoRollCallService)
 
 Services that power http://www.cryptorollcall.com
 
