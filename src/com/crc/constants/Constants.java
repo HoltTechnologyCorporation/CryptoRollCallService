@@ -10,6 +10,7 @@ public class Constants {
 	public static final String CRYPTO_COMPARE_COIN_LIST_URL = "https://min-api.cryptocompare.com/data/all/coinlist";
 	public static final String CRYPTO_COMPARE_SOCIAL = "https://www.cryptocompare.com/api/data/socialstats/?id=";
 	public static final String CRYPTO_BASE_IMAGE_URL = "https://www.cryptocompare.com";
+	public static final String CRYPTO_COMPARE_FULL = "https://www.cryptocompare.com/api/data/coinsnapshotfullbyid/?id=";
 	
 	
 	// field names
@@ -21,6 +22,8 @@ public class Constants {
 	public static final String IMAGEURL = "ImageUrl";
 	public static final String PROOFTYPE = "ProofType";
 	public static final String FULLYPREMINED = "FullyPremined";
+	public static final String GENERAL = "General";
+	public static final String AFFILIATE_URL = "AffiliateUrl";
 
 	// cache related
 	public static final Integer TICKER_TIMEOUT = 3;

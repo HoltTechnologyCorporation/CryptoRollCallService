@@ -15,6 +15,8 @@ public class CoinDetails {
 	private String redditUrl;
 	private String facebookUrl;
 	private List<String> codeRepoLinks;
+	private String websiteUrl;
+	
 	public String getId() {
 		return id;
 	}
@@ -87,5 +89,11 @@ public class CoinDetails {
 				+ ", proofType=" + proofType + ", isPreMined=" + isPreMined + ", twitterUrl=" + twitterUrl
 				+ ", redditUrl=" + redditUrl + ", facebookUrl=" + facebookUrl + ", codeRepoLinks=" + codeRepoLinks
 				+ "]";
+	}
+	public String getWebsiteUrl() {
+		return websiteUrl;
+	}
+	public void setWebsiteUrl(String websiteUrl) {
+		this.websiteUrl = websiteUrl;
 	}
 }

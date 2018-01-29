@@ -24,7 +24,7 @@ public class CoinDetailsServiceImpl {
 
 	static OkHttpClient client = new OkHttpClient();
 	static LoadingCache<String, CoinDetails> coinDetailsCache = null;
-
+	
 	// loading
 	static {
 		coinDetailsCache = CacheBuilder.newBuilder().maximumSize(2000)
@@ -112,6 +112,43 @@ public class CoinDetailsServiceImpl {
 		} catch (Exception ex) {
 			System.out.println("Exception within getCoinDetails() " + ex.getClass().getName());
 		}
+		return getCoinDetailsForWebsite(coinDetails.getId(), coinDetails);
+	}	
+	
+	/**
+	 * 
+	 * @param symbol
+	 * @return
+	 */
+	private static CoinDetails getCoinDetailsForWebsite(String symbol, CoinDetails coinDetails) {
+		System.out.println("Getting data from service : getCoinDetailsForWebsite()" + symbol);
+		
+		if(coinDetails == null)
+			return null;
+		
+		Request request = new Request.Builder().url(Constants.CRYPTO_COMPARE_FULL + coinDetails.getId()).build();
+		JsonParser parser = new JsonParser();
+
+		try (Response response = client.newCall(request).execute()) {
+			JsonObject o = parser.parse(response.body().string()).getAsJsonObject();
+			JsonObject dataNode = o.getAsJsonObject(Constants.DATA);
+			
+			if(dataNode == null)
+				return coinDetails;
+			
+			JsonObject generalNode = dataNode.getAsJsonObject(Constants.GENERAL);
+			
+			if(generalNode == null)
+				return coinDetails;
+			
+			String webUrl = generalNode.get(Constants.AFFILIATE_URL).getAsString();
+			if(webUrl != null)
+				coinDetails.setWebsiteUrl(webUrl);
+			
+		} catch (Exception ex) {
+			System.out.println("Exception within getCoinDetailsForWebsite() " + ex.getClass().getName());
+		}
 		return coinDetails;
 	}	
+	
 }
