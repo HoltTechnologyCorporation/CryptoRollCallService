@@ -2,20 +2,49 @@ package com.crc.models;
 
 import java.util.List;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(value = "CoinDetails - Details of the coin : images, social stats, source code and more")
 public class CoinDetails {
 
+	@ApiModelProperty(value = "Id of the crypto currency")
 	private String id;
+	
+	@ApiModelProperty(value = "Image url of the crypto currency")
 	private String imageUrl;
+	
+	@ApiModelProperty(value = "Symbol of the crypto currency")
 	private String symbol;
+	
+	@ApiModelProperty(value = "Name of the crypto currency")
 	private String name;
+	
+	@ApiModelProperty(value = "Mining algorithm used by the crypto currency")
 	private String algorithm;
+	
+	@ApiModelProperty(value = "Proof type for the crypto currency")
 	private String proofType;
+	
+	@ApiModelProperty(value = "Boolean representing if the coin is pre-mined")
 	private boolean isPreMined;
+	
+	@ApiModelProperty(value = "Official twitter url of the crypto currency")
 	private String twitterUrl;
+	
+	@ApiModelProperty(value = "Official reddit url of the crypto currency")
 	private String redditUrl;
+	
+	@ApiModelProperty(value = "Official facebook url of the crypto currency")
 	private String facebookUrl;
+	
+	@ApiModelProperty(value = "Links to the source code")
 	private List<String> codeRepoLinks;
+	
+	@ApiModelProperty(value = "Official website url of the crypto currency")
 	private String websiteUrl;
+	
+	@ApiModelProperty(value = "Exchanges where the crypto currency is available for trade")
 	private List<String> availableExchanges;
 
 	public String getId() {
