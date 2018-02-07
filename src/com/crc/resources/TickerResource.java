@@ -39,7 +39,8 @@ import io.swagger.annotations.SwaggerDefinition;
 						name = "Developer", 
 						email = "cryptorollcall@gmail.com", 
 						url = "http://www.cryptorollcall.com")
-				)
+				),
+				schemes = SwaggerDefinition.Scheme.HTTP
 		)
 @Api(value = "Ticker")
 @Path("/ticker")

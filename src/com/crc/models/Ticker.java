@@ -9,37 +9,37 @@ import io.swagger.annotations.ApiModelProperty;
 @XmlRootElement
 public class Ticker {
 
-	@ApiModelProperty(value = "Id of the crypto currency", example = "power-ledger")
+	@ApiModelProperty(value = "Id of the crypto currency")
 	private String id;
 	
-	@ApiModelProperty(value = "Name of the crypto currency", example = "Power Ledger")
+	@ApiModelProperty(value = "Name of the crypto currency")
 	private String name;
 	
-	@ApiModelProperty(value = "Symbol of the crypto currency", example = "POWR")
+	@ApiModelProperty(value = "Symbol of the crypto currency")
 	private String symbol;
 	
-	@ApiModelProperty(value = "Rank of the crypto currency", example = "10")
+	@ApiModelProperty(value = "Rank of the crypto currency")
 	private String rank;
 	
-	@ApiModelProperty(value = "Price value in USD", example = "0.42")
+	@ApiModelProperty(value = "Price value in USD")
 	private String price_usd;
 	
-	@ApiModelProperty(value = "Price value in BTC", example = "0.21")
+	@ApiModelProperty(value = "Price value in BTC")
 	private String price_btc;
 	
-	@ApiModelProperty(value = "Market capitalization in USD", example = "443234")
+	@ApiModelProperty(value = "Market capitalization in USD")
 	private String market_cap_usd;
 	
-	@ApiModelProperty(value = "Available coin supply", example = "123453")
+	@ApiModelProperty(value = "Available coin supply")
 	private String available_supply;
 	
-	@ApiModelProperty(value = "Percent change in price in the previous hour", example = "3.0")
+	@ApiModelProperty(value = "Percent change in price in the previous hour")
 	private double percent_change_1h;
 	
-	@ApiModelProperty(value = "Percent change in price in the previous day", example = "3.0")
+	@ApiModelProperty(value = "Percent change in price in the previous day")
 	private double percent_change_24h;
 	
-	@ApiModelProperty(value = "Percent change in price in the previous week", example = "3.0")
+	@ApiModelProperty(value = "Percent change in price in the previous week")
 	private double percent_change_7d;
 
 	public String getId() {

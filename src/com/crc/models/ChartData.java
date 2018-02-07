@@ -12,10 +12,10 @@ public class ChartData {
 		this.data = data;
 	}
 
-	@ApiModelProperty(value = "Chart label", example = "Name of the coin (String)")
+	@ApiModelProperty(value = "Chart label typically the name of the coin.")
 	private String label;
 	
-	@ApiModelProperty(value = "Chart data value", example = "123.012")
+	@ApiModelProperty(value = "Chart data value numeric value")
 	private Double data;
 
 	public String getLabel() {

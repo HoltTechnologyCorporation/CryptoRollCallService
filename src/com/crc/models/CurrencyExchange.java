@@ -6,7 +6,7 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel(value = "CurrencyExchange - Container for currency exchange rates")
 public class CurrencyExchange {
 
-	@ApiModelProperty(value = "Base currency used for calculating exchange rates", example = "USD")
+	@ApiModelProperty(value = "Base currency used for calculating exchange rates")
 	private String base;
 	
 	@ApiModelProperty(value = "Date on which the exchange rates were calculated")
