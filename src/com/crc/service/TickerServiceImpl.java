@@ -7,6 +7,9 @@ import com.crc.constants.Constants;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -104,5 +107,23 @@ public class TickerServiceImpl {
 			System.out.println("Exception within getTicker() " + ex.getClass().getName());
 		}
 		return result;
+	}
+	
+	
+	/**
+	 * Utility method to print options
+	 * TODO: Need to store it in DB
+	 * @param result
+	 */
+	private void printOptions(String result) {
+
+		JsonParser parser = new JsonParser();
+		JsonArray arr = parser.parse(result).getAsJsonArray();
+		for(int i=0; i<arr.size(); i++) {
+			JsonObject obj = arr.get(i).getAsJsonObject();
+			System.out.println("<option value =\"" + obj.get("id").getAsString().replaceAll(" ", "-").toLowerCase() + "~" + obj.get("symbol").getAsString() + "\">");
+			System.out.println(obj.get("name").getAsString());
+			System.out.println("</option>");
+		}
 	}
 }

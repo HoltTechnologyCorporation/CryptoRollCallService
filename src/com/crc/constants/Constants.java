@@ -11,7 +11,9 @@ public class Constants {
 	public static final String CRYPTO_COMPARE_SOCIAL = "https://www.cryptocompare.com/api/data/socialstats/?id=";
 	public static final String CRYPTO_BASE_IMAGE_URL = "https://www.cryptocompare.com";
 	public static final String CRYPTO_COMPARE_FULL = "https://www.cryptocompare.com/api/data/coinsnapshotfullbyid/?id=";
-	
+	// TODO : may need to change, once it moves to min api
+	public static final String CRYPTO_COMPARE_COIN_SNAPSHOT = "https://www.cryptocompare.com/api/data/coinsnapshot/?fsym=~&tsym=BTC";
+
 	
 	// field names
 	public static final String DATA = "Data";
@@ -24,7 +26,9 @@ public class Constants {
 	public static final String FULLYPREMINED = "FullyPremined";
 	public static final String GENERAL = "General";
 	public static final String AFFILIATE_URL = "AffiliateUrl";
-
+	public static final String EXCHANGES = "Exchanges";
+	public static final String MARKET = "MARKET";
+	
 	// cache related
 	public static final Integer TICKER_TIMEOUT = 3;
 	public static final Integer COIN_DETAIL_TIMEOUT = 12;
@@ -36,5 +40,14 @@ public class Constants {
 	public static final String CODEREPOSITORY = "CodeRepository";
 	public static final String LIST = "List";
 	public static final String URL = "url";
-	
+
+	// number of words in pass phrase
+	public static final Integer DIFFICULTY = 3;
+
+	// hash related
+	public static final Integer ITERATIONS = 14000;
+	public static final Integer KEY_LENGTH = 256;
+	public static final String KEY_FACTORY = "PBKDF2WithHmacSHA1";
+	public static final String SECURE_RANDOM_INSTANCE = "SHA1PRNG";
+
 }

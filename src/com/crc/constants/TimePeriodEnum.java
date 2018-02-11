@@ -11,17 +11,5 @@ public enum TimePeriodEnum {
 
 	public String toString() {
 		return value;
-	}
-
-	public static String getEnumNameForValue(Object value) {
-		TimePeriodEnum[] values = TimePeriodEnum.values();
-		String enumValue = null;
-		for (TimePeriodEnum eachValue : values) {
-			enumValue = eachValue.toString();
-			if (enumValue.equals(value)) {
-				return eachValue.name();
-			}
-		}
-		return enumValue;
-	}
+	}	
 }

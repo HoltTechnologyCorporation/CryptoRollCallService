@@ -2,10 +2,19 @@ package com.crc.models;
 
 import java.util.List;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(value = "ChartDataContainer - Container for charts of top performing coins")
 public class ChartDataContainer {
 
+	@ApiModelProperty(value = "List of top 5 performers in the previous hour")
 	private List<ChartData> hourlyList;
+	
+	@ApiModelProperty(value = "List of top 5 performers in the previous day")
 	private List<ChartData> dailyList;
+	
+	@ApiModelProperty(value = "List of top 5 performers in the previous week")
 	private List<ChartData> weeklyList;
 
 	public List<ChartData> getHourlyList() {

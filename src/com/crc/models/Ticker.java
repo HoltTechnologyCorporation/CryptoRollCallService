@@ -2,19 +2,44 @@ package com.crc.models;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(value = "Ticker - Container for crypto currency ticker")
 @XmlRootElement
 public class Ticker {
 
+	@ApiModelProperty(value = "Id of the crypto currency")
 	private String id;
+	
+	@ApiModelProperty(value = "Name of the crypto currency")
 	private String name;
+	
+	@ApiModelProperty(value = "Symbol of the crypto currency")
 	private String symbol;
+	
+	@ApiModelProperty(value = "Rank of the crypto currency")
 	private String rank;
+	
+	@ApiModelProperty(value = "Price value in USD")
 	private String price_usd;
+	
+	@ApiModelProperty(value = "Price value in BTC")
 	private String price_btc;
+	
+	@ApiModelProperty(value = "Market capitalization in USD")
 	private String market_cap_usd;
+	
+	@ApiModelProperty(value = "Available coin supply")
 	private String available_supply;
+	
+	@ApiModelProperty(value = "Percent change in price in the previous hour")
 	private double percent_change_1h;
+	
+	@ApiModelProperty(value = "Percent change in price in the previous day")
 	private double percent_change_24h;
+	
+	@ApiModelProperty(value = "Percent change in price in the previous week")
 	private double percent_change_7d;
 
 	public String getId() {
