@@ -115,6 +115,7 @@ public class TickerServiceImpl {
 	 * TODO: Need to store it in DB
 	 * @param result
 	 */
+	@SuppressWarnings("unused")
 	private void printOptions(String result) {
 
 		JsonParser parser = new JsonParser();

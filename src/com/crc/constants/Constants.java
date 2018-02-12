@@ -49,5 +49,6 @@ public class Constants {
 	public static final Integer KEY_LENGTH = 256;
 	public static final String KEY_FACTORY = "PBKDF2WithHmacSHA1";
 	public static final String SECURE_RANDOM_INSTANCE = "SHA1PRNG";
+	public static final String STATIC_SALT_LOC = "/tmp/static_salt";
 
 }

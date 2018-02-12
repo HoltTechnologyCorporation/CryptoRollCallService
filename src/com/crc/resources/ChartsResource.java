@@ -20,6 +20,15 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
+/**
+ * <pre>
+ * APIs for returning charts 
+ * - for home page : top 5 performers per day/hour/week
+ * - historical performance, market cat and volume
+ * </pre>
+ * @author shankarganesh1234
+ *
+ */
 @Api(value = "Charts")
 @Path("/charts")
 public class ChartsResource {
