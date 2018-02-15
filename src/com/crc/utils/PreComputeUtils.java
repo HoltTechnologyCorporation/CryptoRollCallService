@@ -1,10 +1,18 @@
 package com.crc.utils;
 
+import java.awt.image.BufferedImage;
+import java.net.URL;
+import java.net.URLConnection;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+
+import javax.imageio.ImageIO;
 
 import com.crc.constants.Constants;
 import com.crc.models.CoinDetails;
@@ -51,7 +59,7 @@ public class PreComputeUtils {
 					coinDetails.setAlgorithm(
 							coinNode.get(Constants.ALGORITHM) != null ? coinNode.get(Constants.ALGORITHM).getAsString() : null);
 					coinDetails.setImageUrl(
-							coinNode.get(Constants.IMAGEURL) != null ? Constants.CRYPTO_BASE_IMAGE_URL + coinNode.get(Constants.IMAGEURL).getAsString() : null);
+							coinNode.get(Constants.IMAGEURL) != null ? Constants.CLOUDFRONT_BASE_PATH + coinDetails.getSymbol() + ".png" : Constants.CLOUDFRONT_BASE_PATH + "BTC.png");
 					coinDetails.setProofType(
 							coinNode.get(Constants.PROOFTYPE) != null ? coinNode.get(Constants.PROOFTYPE).getAsString() : null);
 					coinDetails.setPreMined(coinNode.get(Constants.FULLYPREMINED) != null ? coinNode.get(Constants.FULLYPREMINED).getAsString().equals("1") ? true : false : false);
@@ -65,4 +73,34 @@ public class PreComputeUtils {
 			System.out.println("Exception within preComputeCoinList() " + ex.getClass().getName());
 		}
 	}
+	
+	/**
+	 * Create local images before uploading to cloudfront
+	 * @param symbol
+	 * @param imageUrl
+	 */
+	@SuppressWarnings("unused")
+	private static void createLocalImages(String symbol, String imageUrl) {
+		
+		if(imageUrl == null)
+			return;
+		
+		try {
+			String fileUrl = "" + symbol + ".png";
+	        Path path = Paths.get(fileUrl);
+	        if(!Files.exists(path)) {
+	        	
+				URLConnection connection = new URL(imageUrl).openConnection();
+				connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11");
+				connection.connect();
+		        BufferedImage img = ImageIO.read(connection.getInputStream());
+	        	
+	        	Path tempPath = Files.createFile(path);
+	        	ImageIO.write(img, "png", tempPath.toFile());
+	        }	        
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+	
 }

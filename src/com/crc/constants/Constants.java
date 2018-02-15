@@ -14,6 +14,8 @@ public class Constants {
 	// TODO : may need to change, once it moves to min api
 	public static final String CRYPTO_COMPARE_COIN_SNAPSHOT = "https://www.cryptocompare.com/api/data/coinsnapshot/?fsym=~&tsym=BTC";
 
+	// Cloudfront 
+	public static final String CLOUDFRONT_BASE_PATH = "https://d4joa9r2yj65e.cloudfront.net/";
 	
 	// field names
 	public static final String DATA = "Data";
