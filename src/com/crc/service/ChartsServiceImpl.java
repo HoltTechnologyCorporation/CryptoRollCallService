@@ -154,7 +154,7 @@ public class ChartsServiceImpl {
 	 * @return
 	 */
 	private static String getHistoricalData(String period, String id) {
-		System.out.println("Getting data from service : getHistoricalData() " + period);
+		System.out.println("Getting data from service : getHistoricalData() " + period + " - Current Req Count= " + Constants.REQ_COUNT++);
 		String result = null;
 		Formatter formatter = new Formatter();
 		Request request = new Request.Builder().url(formatter.format(Constants.COINCAP_HISTO_URL, period, id).toString()).build();

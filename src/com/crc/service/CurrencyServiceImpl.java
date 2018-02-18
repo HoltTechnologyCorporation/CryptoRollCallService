@@ -57,7 +57,7 @@ public class CurrencyServiceImpl {
 	 * @return
 	 */
 	private static String getCurrencyExchangeRates(String currency) {
-		System.out.println("Getting data from service : getCurrencyExchangeRates() " + currency);
+		System.out.println("Getting data from service : getCurrencyExchangeRates() " + currency + " - Current Req Count= " + Constants.REQ_COUNT++);
 		String result = null;
 		Request request = new Request.Builder().url(Constants.FIXER_BASE_URL + currency).build();
 

@@ -1,5 +1,7 @@
 package com.crc.service;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
@@ -20,6 +22,7 @@ public class TickerServiceImpl {
 	static OkHttpClient client = new OkHttpClient();
 	static LoadingCache<String, String> tickersCache = null;
 	static LoadingCache<String, String> tickerCache = null;
+	static Map<String, String> renamingMap = new HashMap<>();
 	
 	static {
 		
@@ -40,6 +43,9 @@ public class TickerServiceImpl {
 						return getTicker(param);
 					}
 				});
+		
+		// handle coin renaming
+		renamingMap.put("raiblocks", "nano");
 	}
 	
 	/**
@@ -79,7 +85,7 @@ public class TickerServiceImpl {
 	 * @return
 	 */
 	private static String getTickers() {
-		System.out.println("Getting data from service : getTickers()");
+		System.out.println("Getting data from service : getTickers() - Current Req Count= " + Constants.REQ_COUNT++);
 		String result = null;
 		Request request = new Request.Builder().url(Constants.COINMARKETCAP_ALL_TICKER_URL).build();
 
@@ -97,8 +103,13 @@ public class TickerServiceImpl {
 	 * @return
 	 */
 	private static String getTicker(String id) {
-		System.out.println("Getting data from service : getTicker() " + id);
+		System.out.println("Getting data from service : getTicker() " + id + " - Current Req Count= " + Constants.REQ_COUNT++);
 		String result = null;
+		
+		// if coin has been renamed, get new name from renamingMap
+		if(renamingMap.containsKey(id))
+			id = renamingMap.get(id);
+		
 		Request request = new Request.Builder().url(Constants.COINMARKETCAP_TICKER_URL + id).build();
 
 		try (Response response = client.newCall(request).execute()) {

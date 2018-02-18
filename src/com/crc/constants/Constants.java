@@ -52,5 +52,8 @@ public class Constants {
 	public static final String KEY_FACTORY = "PBKDF2WithHmacSHA1";
 	public static final String SECURE_RANDOM_INSTANCE = "SHA1PRNG";
 	public static final String STATIC_SALT_LOC = "/tmp/static_salt";
+	
+	// basic req counter
+	public static Long REQ_COUNT = 0L;
 
 }

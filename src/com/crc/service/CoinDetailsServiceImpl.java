@@ -1,7 +1,9 @@
 package com.crc.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
@@ -24,6 +26,7 @@ public class CoinDetailsServiceImpl {
 
 	static OkHttpClient client = new OkHttpClient();
 	static LoadingCache<String, CoinDetails> coinDetailsCache = null;
+	static Map<String, String> renamingMap = new HashMap<>();
 
 	// loading
 	static {
@@ -36,6 +39,7 @@ public class CoinDetailsServiceImpl {
 						return getCoinDetails(param);
 					}
 				});
+		renamingMap.put("NANO", "XRB");
 	}
 
 	/**
@@ -47,8 +51,17 @@ public class CoinDetailsServiceImpl {
 	public String getCoinDetailsFromCache(String symbol) {
 		String result = null;
 
-		if (!PreComputeUtils.coinDetailsMap.containsKey(symbol))
+		if (symbol == null)
 			return null;
+
+		if (!PreComputeUtils.coinDetailsMap.containsKey(symbol)) {
+			if (renamingMap.containsKey(symbol.toUpperCase())) {
+				symbol = renamingMap.get(symbol.toUpperCase());
+				if (!PreComputeUtils.coinDetailsMap.containsKey(symbol)) {
+					return null;
+				}
+			}
+		}
 
 		try {
 			Gson gson = new Gson();
@@ -65,7 +78,8 @@ public class CoinDetailsServiceImpl {
 	 * @return
 	 */
 	private static CoinDetails getCoinDetails(String symbol) {
-		System.out.println("Getting data from service : getCoinDetails()" + symbol);
+		System.out.println("Getting data from service : getCoinDetails() " + symbol + " - Current Req Count= "
+				+ Constants.REQ_COUNT++);
 
 		CoinDetails coinDetails = PreComputeUtils.coinDetailsMap.get(symbol.toUpperCase());
 		if (coinDetails == null)
@@ -115,7 +129,7 @@ public class CoinDetailsServiceImpl {
 		}
 		// append social data
 		coinDetails = getCoinDetailsForWebsite(coinDetails.getId(), coinDetails);
-		
+
 		// append available exchange data
 		coinDetails = getAvailableExchanges(coinDetails.getSymbol(), coinDetails);
 		return coinDetails;
@@ -127,7 +141,8 @@ public class CoinDetailsServiceImpl {
 	 * @return
 	 */
 	private static CoinDetails getCoinDetailsForWebsite(String symbol, CoinDetails coinDetails) {
-		System.out.println("Getting data from service : getCoinDetailsForWebsite()" + symbol);
+		System.out.println("Getting data from service : getCoinDetailsForWebsite() " + symbol + " - Current Req Count= "
+				+ Constants.REQ_COUNT++);
 
 		if (coinDetails == null)
 			return null;
@@ -163,7 +178,8 @@ public class CoinDetailsServiceImpl {
 	 * @return
 	 */
 	private static CoinDetails getAvailableExchanges(String symbol, CoinDetails coinDetails) {
-		System.out.println("Getting data from service : getAvailableExchanges()" + symbol);
+		System.out.println("Getting data from service : getAvailableExchanges() " + symbol + " - Current Req Count= "
+				+ Constants.REQ_COUNT++);
 
 		if (coinDetails == null)
 			return null;
@@ -185,13 +201,13 @@ public class CoinDetailsServiceImpl {
 				return coinDetails;
 
 			List<String> availableExchanges = new ArrayList<>();
-			for(int i=0; i<exchangesNode.size(); i++) {
+			for (int i = 0; i < exchangesNode.size(); i++) {
 				JsonObject obj = exchangesNode.get(i).getAsJsonObject();
 				availableExchanges.add(obj.get(Constants.MARKET).getAsString());
 			}
 
 			coinDetails.setAvailableExchanges(availableExchanges);
-			
+
 		} catch (Exception ex) {
 			System.out.println("Exception within getAvailableExchanges() " + ex.getClass().getName());
 		}
