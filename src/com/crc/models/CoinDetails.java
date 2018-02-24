@@ -46,6 +46,39 @@ public class CoinDetails {
 	
 	@ApiModelProperty(value = "Exchanges where the crypto currency is available for trade")
 	private List<String> availableExchanges;
+	
+	@ApiModelProperty(value = "Title for SEO")
+	private String seoTitle;
+	
+	@ApiModelProperty(value = "Description for SEO")
+	private String seoDescription;
+	
+	@ApiModelProperty(value = "Coin name or friendly name")
+	private String fullName;
+	
+	public String getFullName() {
+		return fullName;
+	}
+
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
+
+	public String getSeoTitle() {
+		return seoTitle;
+	}
+
+	public void setSeoTitle(String seoTitle) {
+		this.seoTitle = seoTitle;
+	}
+
+	public String getSeoDescription() {
+		return seoDescription;
+	}
+
+	public void setSeoDescription(String seoDescription) {
+		this.seoDescription = seoDescription;
+	}
 
 	public String getId() {
 		return id;
@@ -137,10 +170,11 @@ public class CoinDetails {
 
 	@Override
 	public String toString() {
-		return "CoinDetails [id=" + id + ", imageUrl=" + imageUrl + ", symbol=" + symbol + ", algorithm=" + algorithm
-				+ ", proofType=" + proofType + ", isPreMined=" + isPreMined + ", twitterUrl=" + twitterUrl
-				+ ", redditUrl=" + redditUrl + ", facebookUrl=" + facebookUrl + ", codeRepoLinks=" + codeRepoLinks
-				+ "]";
+		return "CoinDetails [id=" + id + ", imageUrl=" + imageUrl + ", symbol=" + symbol + ", name=" + name
+				+ ", algorithm=" + algorithm + ", proofType=" + proofType + ", isPreMined=" + isPreMined
+				+ ", twitterUrl=" + twitterUrl + ", redditUrl=" + redditUrl + ", facebookUrl=" + facebookUrl
+				+ ", codeRepoLinks=" + codeRepoLinks + ", websiteUrl=" + websiteUrl + ", availableExchanges="
+				+ availableExchanges + ", seoTitle=" + seoTitle + ", seoDescription=" + seoDescription + "]";
 	}
 
 	public String getWebsiteUrl() {

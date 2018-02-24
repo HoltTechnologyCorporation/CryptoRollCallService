@@ -63,6 +63,7 @@ public class PreComputeUtils {
 					coinDetails.setProofType(
 							coinNode.get(Constants.PROOFTYPE) != null ? coinNode.get(Constants.PROOFTYPE).getAsString() : null);
 					coinDetails.setPreMined(coinNode.get(Constants.FULLYPREMINED) != null ? coinNode.get(Constants.FULLYPREMINED).getAsString().equals("1") ? true : false : false);
+					coinDetails.setFullName(Constants.FULL_NAME != null ? coinNode.get(Constants.FULL_NAME).getAsString() : null);
 					coinDetailsMap.put(coinDetails.getSymbol(), coinDetails);
 				} catch (Exception ex) {
 					ex.printStackTrace();

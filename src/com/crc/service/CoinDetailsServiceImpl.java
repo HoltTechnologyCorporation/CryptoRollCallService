@@ -123,7 +123,12 @@ public class CoinDetailsServiceImpl {
 				}
 			}
 			coinDetails.setCodeRepoLinks(repoList);
-
+			
+			// set seo data
+			coinDetails.setSeoTitle(coinDetails.getFullName() + " " + Constants.BASE_TITLE_SEO);
+			coinDetails.setSeoDescription(coinDetails.getFullName() + " " + Constants.BASE_DESC_SEO);
+			
+			
 		} catch (Exception ex) {
 			System.out.println("Exception within getCoinDetails() " + ex.getClass().getName());
 		}

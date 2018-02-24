@@ -30,6 +30,7 @@ public class Constants {
 	public static final String AFFILIATE_URL = "AffiliateUrl";
 	public static final String EXCHANGES = "Exchanges";
 	public static final String MARKET = "MARKET";
+	public static final String FULL_NAME = "FullName";
 	
 	// cache related
 	public static final Integer TICKER_TIMEOUT = 3;
@@ -55,5 +56,9 @@ public class Constants {
 	
 	// basic req counter
 	public static Long REQ_COUNT = 0L;
+	
+	// seo
+	public static String BASE_TITLE_SEO = "Live and historical prices, social links and more";
+	public static String BASE_DESC_SEO = "Stay up to date with the latest price movements. Live and historical price charts, social links, supply, market cap and breaking news.";
 
 }
