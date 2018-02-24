@@ -9,7 +9,7 @@ public class Application {
 	public static void main(String[] args) throws Exception {
 
 		ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
-		context.setContextPath("/");
+		context.setContextPath("/CryptoRollCallService");
 
 		Server jettyServer = new Server(8080);
 		jettyServer.setHandler(context);
