@@ -14,6 +14,11 @@ public class Constants {
 	// TODO : may need to change, once it moves to min api
 	public static final String CRYPTO_COMPARE_COIN_SNAPSHOT = "https://www.cryptocompare.com/api/data/coinsnapshot/?fsym=~&tsym=BTC";
 
+	// news api 
+	public static final String NEWS_RSS_JSON = "https://api.rss2json.com/v1/api.json?rss_url=";
+	public static final String NEWS_BASE_URL = "https://news.google.com/news/rss/search/section/q/%s/%s?hl=en&gl=US&ned=us";
+	public static final String NEWS_PARAM_SUFFIX = " cryptocurrency";
+	
 	// Cloudfront 
 	public static final String CLOUDFRONT_BASE_PATH = "https://d4joa9r2yj65e.cloudfront.net/";
 	
@@ -34,7 +39,7 @@ public class Constants {
 	
 	// cache related
 	public static final Integer TICKER_TIMEOUT = 3;
-	public static final Integer COIN_DETAIL_TIMEOUT = 12;
+	public static final Integer COIN_DETAIL_TIMEOUT = 4;
 	public static final Integer FIXER_EXCHANGE_TIMEOUT = 1;
 	public static final String TWITTER = "Twitter";
 	public static final String LINK = "link";

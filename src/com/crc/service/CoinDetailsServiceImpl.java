@@ -1,5 +1,7 @@
 package com.crc.service;
 
+import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,7 +11,10 @@ import java.util.concurrent.TimeUnit;
 
 import com.crc.constants.Constants;
 import com.crc.models.CoinDetails;
+import com.crc.models.news.CryptoNews;
 import com.crc.utils.PreComputeUtils;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
@@ -27,7 +32,7 @@ public class CoinDetailsServiceImpl {
 	static OkHttpClient client = new OkHttpClient();
 	static LoadingCache<String, CoinDetails> coinDetailsCache = null;
 	static Map<String, String> renamingMap = new HashMap<>();
-
+	static ObjectMapper objectMapper = new ObjectMapper();
 	// loading
 	static {
 		coinDetailsCache = CacheBuilder.newBuilder().maximumSize(2000)
@@ -40,6 +45,7 @@ public class CoinDetailsServiceImpl {
 					}
 				});
 		renamingMap.put("NANO", "XRB");
+		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 	}
 
 	/**
@@ -137,6 +143,10 @@ public class CoinDetailsServiceImpl {
 
 		// append available exchange data
 		coinDetails = getAvailableExchanges(coinDetails.getSymbol(), coinDetails);
+		
+		// append latest news
+		coinDetails = getTrendingNews(coinDetails);
+		
 		return coinDetails;
 	}
 
@@ -216,6 +226,39 @@ public class CoinDetailsServiceImpl {
 		} catch (Exception ex) {
 			System.out.println("Exception within getAvailableExchanges() " + ex.getClass().getName());
 		}
+		return coinDetails;
+	}
+	
+	/**
+	 * Return the latest trending news 
+	 * @param coinDetails
+	 * @return
+	 */
+	private static CoinDetails getTrendingNews(CoinDetails coinDetails) {
+		
+		if(coinDetails == null || coinDetails.getFullName() == null || coinDetails.getFullName().isEmpty())
+			return null;
+		
+		try {
+			String param = coinDetails.getFullName() + Constants.NEWS_PARAM_SUFFIX;
+			String url = URLEncoder.encode(String.format(Constants.NEWS_BASE_URL, param, param), "utf-8").replace("+", "%2520");
+			String rssToJsonUrl = Constants.NEWS_RSS_JSON + url;
+			
+			Request request = new Request.Builder().url(rssToJsonUrl).build();
+			Response response = client.newCall(request).execute();
+			
+			String jsonString = response.body().string();
+			CryptoNews value = objectMapper.readValue(jsonString, CryptoNews.class);
+			
+			if(value == null || !value.getStatus().equals("ok"))
+				return null;
+			
+			coinDetails.setCoinNews(value);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return coinDetails;
 	}
 }

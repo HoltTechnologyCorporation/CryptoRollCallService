@@ -2,6 +2,8 @@ package com.crc.models;
 
 import java.util.List;
 
+import com.crc.models.news.CryptoNews;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -56,8 +58,19 @@ public class CoinDetails {
 	@ApiModelProperty(value = "Coin name or friendly name")
 	private String fullName;
 	
+	@ApiModelProperty(value = "Latest news about the coin")
+	private CryptoNews coinNews;
+	
 	public String getFullName() {
 		return fullName;
+	}
+
+	public CryptoNews getCoinNews() {
+		return coinNews;
+	}
+
+	public void setCoinNews(CryptoNews coinNews) {
+		this.coinNews = coinNews;
 	}
 
 	public void setFullName(String fullName) {
