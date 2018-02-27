@@ -32,7 +32,7 @@ public class Constants {
 	public static final String PROOFTYPE = "ProofType";
 	public static final String FULLYPREMINED = "FullyPremined";
 	public static final String GENERAL = "General";
-	public static final String AFFILIATE_URL = "AffiliateUrl";
+	public static final String AFFILIATE_URL = "WebsiteUrl";
 	public static final String EXCHANGES = "Exchanges";
 	public static final String MARKET = "MARKET";
 	public static final String FULL_NAME = "FullName";
